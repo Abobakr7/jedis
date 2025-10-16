@@ -9,6 +9,7 @@ public class CommandRegistry {
         this.commands = new HashMap<>();
 
         commands.put("PING", new PingCommand());
+        commands.put("ECHO", new Echo());
     }
 
     public Command getCommand(String commandName) {
