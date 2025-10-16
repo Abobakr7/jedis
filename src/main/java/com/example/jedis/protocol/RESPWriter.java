@@ -30,4 +30,9 @@ public class RESPWriter {
         out.write(String.format("-ERR %s\r\n", msg).getBytes());
         out.flush();
     }
+
+    public static void writeEmptyArray(OutputStream out) throws IOException {
+        out.write("*0\r\n".getBytes());
+        out.flush();
+    }
 }
