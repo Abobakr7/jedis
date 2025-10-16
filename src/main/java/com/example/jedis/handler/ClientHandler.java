@@ -29,15 +29,15 @@ public class ClientHandler implements Runnable {
             while ((line = in.readLine()) != null) {
                 if (!line.startsWith("*")) continue;
 
-                String[] parts = parseLine(line, in);
-                if (parts == null || parts.length == 0 || parts[0] == null) {
+                String[] args = parseLine(line, in);
+                if (args == null || args.length == 0 || args[0] == null) {
                     continue;
                 }
 
-                String commandName = parts[0].toUpperCase();
+                String commandName = args[0].toUpperCase();
                 Command command = commandRegistry.getCommand(commandName);
                 if (command != null) {
-                    command.execute(parts, out);
+                    command.execute(args, out);
                 } else {
                     out.write("-ERR unkown command\r\n".getBytes());
                     out.flush();
@@ -54,15 +54,15 @@ public class ClientHandler implements Runnable {
     
     private String[] parseLine(String line, BufferedReader in) throws IOException {
         int arrayCount = Integer.parseInt(line.substring(1));
-        String[] parts = new String[arrayCount];
+        String[] args = new String[arrayCount];
 
-        for (int i = 0; i < parts.length; i++) {
+        for (int i = 0; i < args.length; i++) {
             String subLine = in.readLine();
             if (subLine == null || !subLine.startsWith("$")) break;
 
             String data = in.readLine();
-            parts[i] = data;
+            args[i] = data;
         }
-        return parts;
+        return args;
     }
 }
