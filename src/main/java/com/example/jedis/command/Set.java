@@ -2,6 +2,7 @@ package com.example.jedis.command;
 
 import java.io.OutputStream;
 
+import com.example.jedis.protocol.RESPWriter;
 import com.example.jedis.storage.JedisStore;
 
 public class Set implements Command {
@@ -14,8 +15,7 @@ public class Set implements Command {
     @Override
     public void execute(String[] args, OutputStream out) throws Exception {
         if (args.length != 3 && args.length != 5) {
-            out.write("-ERR wrong number of arguments for 'SET'\r\n".getBytes());
-            out.flush();
+            RESPWriter.writeError(out, "wrong number of arguments for 'SET'");
             return;
         }
 
@@ -31,28 +31,24 @@ public class Set implements Command {
                 try {
                     expiry = System.currentTimeMillis() + Long.parseLong(val) * 1000;
                 } catch (NumberFormatException e) {
-                    out.write("-ERR value is not an integer or out of range\r\n".getBytes());
-                    out.flush();
+                    RESPWriter.writeError(out, "value is not an integer or out of range");
                     return;
                 }
             } else if (option.equals("PX")) {
                 try {
                     expiry = System.currentTimeMillis() + Long.parseLong(val);
                 } catch (NumberFormatException e) {
-                    out.write("-ERR value is not an integer or out of range\r\n".getBytes());
-                    out.flush();
+                    RESPWriter.writeError(out, "value is not an integer or out of range");
                     return;
                 }
             } else {
-                out.write("-ERR syntax error\r\n".getBytes());
-                out.flush();
+                RESPWriter.writeError(out, "-ERR syntax error");
                 return;
             }
         }
 
         store.set(key, value, expiry);
-        out.write("+OK\r\n".getBytes());
-        out.flush();
+        RESPWriter.writeSimpleString(out, "OK");
     }
     
 }

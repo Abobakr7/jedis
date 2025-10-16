@@ -2,6 +2,7 @@ package com.example.jedis.command;
 
 import java.io.OutputStream;
 
+import com.example.jedis.protocol.RESPWriter;
 import com.example.jedis.storage.JedisStore;
 
 public class Get implements Command {
@@ -14,19 +15,17 @@ public class Get implements Command {
     @Override
     public void execute(String[] args, OutputStream out) throws Exception {
         if (args.length < 2) {
-            out.write("-ERR wrong number of arguments for 'GET'\r\n".getBytes());
-            out.flush();
+            RESPWriter.writeError(out, "wrong number of arguments for 'GET'");
             return;
         }
 
         String key = args[1];
         String value = store.get(key);
         if (value == null) {
-            out.write("$-1\r\n".getBytes());
+            RESPWriter.writeNullBulkString(out);
         } else {
-            out.write(String.format("$%d\r\n%s\r\n", value.length(), value).getBytes());
+            RESPWriter.writeBulkString(out, value);
         }
-        out.flush();
     }
     
 }

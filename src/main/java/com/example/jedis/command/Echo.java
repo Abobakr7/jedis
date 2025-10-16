@@ -2,6 +2,8 @@ package com.example.jedis.command;
 
 import java.io.OutputStream;
 
+import com.example.jedis.protocol.RESPWriter;
+
 public class Echo implements Command {
 
     @Override
@@ -13,10 +15,10 @@ public class Echo implements Command {
                 if (i < args.length - 1) sb.append(" ");
             }
             String res = sb.toString();
+            RESPWriter.writeBulkString(out, res);
             out.write(String.format("$%d\r\n%s\r\n", res.length(), res).getBytes());
         } else {
-            out.write("-ERR wrong number of arguments for 'ECHO'\r\n".getBytes());
+            RESPWriter.writeError(out, "wrong number of arguments for 'ECHO'");
         }
-        out.flush();
     }
 }
