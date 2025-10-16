@@ -17,6 +17,7 @@ public class CommandRegistry {
 
         commands.put("SET", new Set(store));
         commands.put("GET", new Get(store));
+        commands.put("RPUSH", new RPush(store));
     }
 
     public Command getCommand(String commandName) {
