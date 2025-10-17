@@ -23,6 +23,7 @@ public class CommandRegistry {
         commands.put("LLEN", new LLen(store));
         commands.put("LPOP", new LPop(store));
         commands.put("RPOP", new RPop(store));
+        commands.put("BLPOP", new BLPop(store));
     }
 
     public Command getCommand(String commandName) {
