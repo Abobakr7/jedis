@@ -20,6 +20,7 @@ public class CommandRegistry {
         commands.put("RPUSH", new RPush(store));
         commands.put("LPUSH", new LPush(store));
         commands.put("LRANGE", new LRange(store));
+        commands.put("LLEN", new LLen(store));
     }
 
     public Command getCommand(String commandName) {
