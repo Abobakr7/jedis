@@ -36,4 +36,8 @@ public class JedisStore {
     public boolean containsList(String key) {
         return listStore.containsKey(key);
     }
+
+    public boolean containsString(String key) {
+        return store.containsKey(key);
+    }
 }
