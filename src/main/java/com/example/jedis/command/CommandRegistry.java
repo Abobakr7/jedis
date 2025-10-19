@@ -12,19 +12,19 @@ public class CommandRegistry {
         this.commands = new HashMap<>();
         this.store = new JedisStore();
 
-        commands.put("PING", new PingCommand());
-        commands.put("ECHO", new Echo());
+        commands.put("ping", new PingCommand());
+        commands.put("echo", new Echo());
 
-        commands.put("SET", new Set(store));
-        commands.put("GET", new Get(store));
-        commands.put("RPUSH", new RPush(store));
-        commands.put("LPUSH", new LPush(store));
-        commands.put("LRANGE", new LRange(store));
-        commands.put("LLEN", new LLen(store));
-        commands.put("LPOP", new LPop(store));
-        commands.put("RPOP", new RPop(store));
-        commands.put("BLPOP", new BLPop(store));
-        commands.put("TYPE", new Type(store));
+        commands.put("set", new Set(store));
+        commands.put("get", new Get(store));
+        commands.put("rpush", new RPush(store));
+        commands.put("lpush", new LPush(store));
+        commands.put("lrange", new LRange(store));
+        commands.put("llen", new LLen(store));
+        commands.put("lpop", new LPop(store));
+        commands.put("rpop", new RPop(store));
+        commands.put("blpop", new BLPop(store));
+        commands.put("type", new Type(store));
     }
 
     public Command getCommand(String commandName) {

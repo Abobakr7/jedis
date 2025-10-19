@@ -15,7 +15,7 @@ public class Set implements Command {
     @Override
     public void execute(String[] args, OutputStream out) throws Exception {
         if (args.length != 3 && args.length != 5) {
-            RESPWriter.writeError(out, "wrong number of arguments for 'SET'");
+            RESPWriter.writeError(out, "wrong number of arguments for 'set'");
             return;
         }
 

@@ -15,7 +15,7 @@ public class BLPop implements Command {
     @Override
     public void execute(String[] args, OutputStream out) throws Exception {
         if (args.length < 3) {
-            RESPWriter.writeError(out, "wrong number of arguments for 'BLPOP'");
+            RESPWriter.writeError(out, "wrong number of arguments for 'blpop'");
             return;
         }
 

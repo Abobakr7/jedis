@@ -16,7 +16,7 @@ public class LRange implements Command {
     @Override
     public void execute(String[] args, OutputStream out) throws Exception {
         if (args.length < 4) {
-            RESPWriter.writeError(out, "wrong number of arguments for 'LRANGE'");
+            RESPWriter.writeError(out, "wrong number of arguments for 'lrange'");
             return;
         }
 

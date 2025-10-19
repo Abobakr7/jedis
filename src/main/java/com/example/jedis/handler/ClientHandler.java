@@ -34,7 +34,7 @@ public class ClientHandler implements Runnable {
                     continue;
                 }
 
-                String commandName = args[0].toUpperCase();
+                String commandName = args[0].toLowerCase();
                 Command command = commandRegistry.getCommand(commandName);
                 if (command != null) {
                     command.execute(args, out);

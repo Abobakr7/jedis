@@ -18,7 +18,7 @@ public class Echo implements Command {
             RESPWriter.writeBulkString(out, res);
             out.write(String.format("$%d\r\n%s\r\n", res.length(), res).getBytes());
         } else {
-            RESPWriter.writeError(out, "wrong number of arguments for 'ECHO'");
+            RESPWriter.writeError(out, "wrong number of arguments for 'echo'");
         }
     }
 }

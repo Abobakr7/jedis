@@ -15,7 +15,7 @@ public class Type implements Command {
     @Override
     public void execute(String[] args, OutputStream out) throws Exception {
         if (args.length < 2) {
-            RESPWriter.writeError(out, "wrong number of arguments for 'TYPE'");
+            RESPWriter.writeError(out, "wrong number of arguments for 'type'");
             return;
         }
 

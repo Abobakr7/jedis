@@ -16,7 +16,7 @@ public class LPush implements Command {
     @Override
     public void execute(String[] args, OutputStream out) throws Exception {
         if (args.length < 3) {
-            RESPWriter.writeError(out, "wrong number of arguments for 'LPUSH'");
+            RESPWriter.writeError(out, "wrong number of arguments for 'lpush'");
             return;
         }
 
