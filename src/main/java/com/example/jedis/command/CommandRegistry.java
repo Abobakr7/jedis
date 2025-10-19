@@ -12,7 +12,7 @@ public class CommandRegistry {
         this.commands = new HashMap<>();
         this.store = new JedisStore();
 
-        commands.put("ping", new PingCommand());
+        commands.put("ping", new Ping());
         commands.put("echo", new Echo());
 
         commands.put("set", new Set(store));
