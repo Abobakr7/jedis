@@ -26,6 +26,7 @@ public class CommandRegistry {
         commands.put("blpop", new BLPop(store));
         commands.put("type", new Type(store));
         commands.put("xadd", new XAdd(store));
+        commands.put("xrange", new XRange(store));
     }
 
     public Command getCommand(String commandName) {
