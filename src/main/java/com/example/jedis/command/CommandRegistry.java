@@ -25,6 +25,7 @@ public class CommandRegistry {
         commands.put("rpop", new RPop(store));
         commands.put("blpop", new BLPop(store));
         commands.put("type", new Type(store));
+        commands.put("xadd", new XAdd(store));
     }
 
     public Command getCommand(String commandName) {
