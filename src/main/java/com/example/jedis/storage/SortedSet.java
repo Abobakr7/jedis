@@ -66,4 +66,37 @@ public class SortedSet {
 
         return rank;
     }
+
+    public synchronized List<String> getRangeByIndex(int start, int stop) {
+        List<String> allMembers = getSortedMembers();
+        int size = allMembers.size();
+
+        if (size == 0) return new ArrayList<>();
+
+        // handle negative indices
+        if (start < 0) start += size;
+        if (stop < 0) stop += size;
+
+        // bounds checking
+        if (start < 0) start = 0;
+        if (stop >= size) stop = size - 1;
+
+        if (start > stop) return new ArrayList<>();
+
+        return new ArrayList<>(allMembers.subList(start, stop + 1));
+    }
+
+    public Double getScore(String member) {
+        return memberToScore.get(member);
+    }
+
+    private synchronized List<String> getSortedMembers() {
+        List<String> result = new ArrayList<>();
+        for (Set<String> members : scoreToMember.values()) {
+            List<String> sortedMembers = new ArrayList<>(members);
+            Collections.sort(sortedMembers);
+            result.addAll(sortedMembers);
+        }
+        return result;
+    }
 }

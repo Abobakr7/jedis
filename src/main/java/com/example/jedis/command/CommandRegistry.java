@@ -30,6 +30,7 @@ public class CommandRegistry {
         commands.put("xread", new XRead(store));
         commands.put("zadd", new ZAdd(store));
         commands.put("zrank", new ZRank(store));
+        commands.put("zrange", new ZRange(store));
     }
 
     public Command getCommand(String commandName) {
