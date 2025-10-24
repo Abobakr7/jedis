@@ -1,5 +1,9 @@
 package com.example.jedis.storage;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
@@ -35,5 +39,31 @@ public class SortedSet {
         return oldScore == null;
     }
 
-    
+    public synchronized Integer getRank(String member) {
+        if (!memberToScore.containsKey(member)) {
+            return null;
+        }
+
+        Double targetScore = memberToScore.get(member);
+        int rank = 0;
+
+        for (Map.Entry<Double, Set<String>> entry : scoreToMember.entrySet()) {
+            if (entry.getKey() < targetScore) {
+                rank += entry.getValue().size();
+            } else if (entry.getKey().equals(targetScore)) {
+                List<String> sortedMembers = new ArrayList<>(entry.getValue());
+                Collections.sort(sortedMembers);
+                for (String m : sortedMembers) {
+                    if (m.equals(member)) {
+                        return rank;
+                    }
+                    rank++;
+                }
+            } else {
+                break;
+            }
+        }
+
+        return rank;
+    }
 }
