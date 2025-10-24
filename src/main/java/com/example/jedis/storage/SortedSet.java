@@ -90,6 +90,10 @@ public class SortedSet {
         return memberToScore.get(member);
     }
 
+    public int size() {
+        return memberToScore.size();
+    }
+
     private synchronized List<String> getSortedMembers() {
         List<String> result = new ArrayList<>();
         for (Set<String> members : scoreToMember.values()) {
