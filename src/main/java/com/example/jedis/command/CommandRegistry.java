@@ -33,6 +33,7 @@ public class CommandRegistry {
         commands.put("zrange", new ZRange(store));
         commands.put("zcard", new ZCard(store));
         commands.put("zscore", new ZScore(store));
+        commands.put("zrem", new ZRem(store));
     }
 
     public Command getCommand(String commandName) {

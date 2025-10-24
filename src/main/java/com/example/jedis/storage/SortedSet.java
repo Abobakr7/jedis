@@ -94,6 +94,22 @@ public class SortedSet {
         return memberToScore.size();
     }
 
+    public synchronized boolean remove(String member) {
+        Double score = memberToScore.remove(member);
+        if (score == null) {
+            return false;
+        }
+
+        Set<String> bucket = scoreToMember.get(score);
+        if (bucket != null) {
+            bucket.remove(member);
+            if (bucket.isEmpty()) {
+                scoreToMember.remove(score);
+            }
+        }
+        return true;
+    }
+
     private synchronized List<String> getSortedMembers() {
         List<String> result = new ArrayList<>();
         for (Set<String> members : scoreToMember.values()) {
