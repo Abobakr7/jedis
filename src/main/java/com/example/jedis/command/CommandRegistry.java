@@ -28,6 +28,7 @@ public class CommandRegistry {
         commands.put("xadd", new XAdd(store));
         commands.put("xrange", new XRange(store));
         commands.put("xread", new XRead(store));
+        commands.put("zadd", new ZAdd(store));
     }
 
     public Command getCommand(String commandName) {
