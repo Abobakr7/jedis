@@ -9,6 +9,7 @@ public class JedisStore {
     private final ConcurrentHashMap<String, ValueEntry> store = new ConcurrentHashMap<>();
     private final ConcurrentHashMap<String, ConcurrentLinkedDeque<Object>> listStore = new ConcurrentHashMap<>();
     private final ConcurrentHashMap<String, List<StreamEntry>> streamStore = new ConcurrentHashMap<>();
+    private final ConcurrentHashMap<String, SortedSet> sortedSetStore = new ConcurrentHashMap<>();
 
 
     // normal store
@@ -176,5 +177,23 @@ public class JedisStore {
         } catch (Exception e) {
             return false;
         }
+    }
+
+    // sorted sets
+    public SortedSet getSortedSet(String key) {
+        return sortedSetStore.get(key);
+    }
+
+    public SortedSet getOrCreateSortedSet(String key) {
+        SortedSet zset = sortedSetStore.get(key);
+        if (zset == null) {
+            zset = new SortedSet();
+            sortedSetStore.put(key, zset);
+        }
+        return zset;
+    }
+
+    public boolean containsSortedSet(String key) {
+        return sortedSetStore.containsKey(key);
     }
 }
