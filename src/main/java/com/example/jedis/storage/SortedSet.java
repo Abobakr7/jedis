@@ -94,6 +94,10 @@ public class SortedSet {
         return memberToScore.size();
     }
 
+    public boolean contains(String member) {
+        return memberToScore.containsKey(member);
+    }
+
     public synchronized boolean remove(String member) {
         Double score = memberToScore.remove(member);
         if (score == null) {
